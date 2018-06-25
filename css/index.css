@@ -1240,6 +1240,10 @@ div.main{
 	position: relative;
 }
 
+.similiar_prods ul{
+	overflow: hidden;
+}
+
 .toggle_filters{
 	position: absolute;
 	width: 30px;

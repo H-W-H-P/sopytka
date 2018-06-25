@@ -133,13 +133,11 @@ Modules.ToggleFilters = (function(self,$){
 
         _$classNames.toggleItem.on(_clickEvent, function(e){
         	e.preventDefault();
-        	_windowWidth = _$classNames.window.width();
-        	_mobile = Modules.isMobail(_windowWidth);
+        	// _windowWidth = _$classNames.window.width();
+        	// _mobile = Modules.isMobail(_windowWidth);
         	self._checkCondition();
         	return false;
-        });
-
-                
+        });        
 
         return self;
 
@@ -147,12 +145,10 @@ Modules.ToggleFilters = (function(self,$){
 
     self._checkCondition = function(){
     	if (_$classNames.parentWrapper.hasClass(_classNames.openFiltersClass)){
-    		if(_mobile) self._hideFilters();
-    		else self._hideFilters();
+    		self._hideFilters();
     	}
     	else{
-    		if(_mobile) self._showFilters();
-    		else self._showFilters();
+    		self._showFilters();
     	}
 
     	return self;
@@ -185,7 +181,81 @@ Modules.ToggleFilters = (function(self,$){
 }(Modules.ToggleFilters || {}, jQuery));
 
 
+Modules.PossibleSlider = (function(self,$){
+
+	var _classNames = {
+		sliderWrapper: '',
+		sliderItem: ''
+	}
+	var _$classNames = {
+		sliderWrapper: '',
+		sliderItem: ''
+	}
+
+	self._construct = function(params){
+
+        $.extend(_classNames, params);
+        _$classNames.sliderWrapper = $(_classNames.sliderWrapper);
+        _$classNames.sliderItem = $(_classNames.sliderItem);
+
+        self._checkNumberOfItems();  
+
+        return self;
+
+    }
+
+    self._checkNumberOfItems = function(){
+
+    	if ((_$classNames.sliderItem.length)>=5){
+    		self._sliderInit();
+    	}
+
+    	return self;
+
+    }
+
+    self._sliderInit = function(){
+
+		var owl = $(".owl-carousel").owlCarousel({
+			items: 5,
+			loop: false,
+			dots: false,
+		  	nav: false,
+		  	// responsive:{
+		  	// 	768:{
+		  	// 		items:1
+		  	// 	},
+		  	// 	1100:{
+		  	// 		items:3
+		  	// 	}
+		  	// }
+		});
+
+    	return self;
+    }
+
+    return {
+
+        init: function(params){
+
+            self._construct(params);
+
+            return self;
+
+        }
+
+    }
+
+}(Modules.PossibleSlider || {}, jQuery));
+
+
 (function($){
+	$(function(){
+    	var possibleSlider = new Modules.PossibleSlider.init({
+            sliderWrapper: '.similiar_prods',
+            sliderItem: '.sim__prod'
+    	});
+    });
     $(function(){
     	var ultravioletTheme = new Modules.UltravioletTheme.init({
             startThemeClass: 'dark-on',
