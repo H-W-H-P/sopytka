@@ -213,9 +213,11 @@ a:hover{
 
 .products__item{
 	/*float: left;*/
-	width: 20%;
-	min-width: 200px;
-	padding: 10px;
+	/*width: 20%;*/
+	width: 204px;
+	/*min-width: 200px;*/
+	/*min-width: 224px;*/
+	/*padding: 10px;*/
 	box-sizing: border-box;
 	min-height: 310px;
 }
@@ -638,6 +640,9 @@ label.type-person-left{
 	margin-left: 1%;
 	color: #0e468b;
 	margin-top: 10px;
+}
+.additional_nav li:first-child{
+	margin-left: 0;
 }
 .additional_nav{
 	padding-top: 20px;
@@ -1063,7 +1068,8 @@ sub{
 .filters{
     background-color: white;
     margin-top: 40px;
-    min-width: 180px;
+    margin-left: 30px;
+    min-width: 201px;
     height: 100%;
     display: none;
 }
@@ -1238,17 +1244,29 @@ div.main{
 	position: absolute;
 	width: 30px;
 	height: 30px;
-	top: 0;
+	top: -20px;
 	right: 0;
-	background-color: red;
+	/*background-color: red;*/
+	background-image: url(../images/filter_icon.png);
+	background-repeat: no-repeat;
+	-webkit-background-size: contain;
+	background-size: contain;
 }
 
 .filters_opened .filters{
 	display: block;
 }
 
+.products{
+	justify-content: space-between;
+}
 
-@media screen and (max-width: 1130px) {
+.close_filters{
+	display: none;
+}
+
+
+@media screen and (max-width: 1129px) {
 	.basket_page__form .basket_page__desc{
 		display: block;
 	}
@@ -1310,6 +1328,44 @@ div.main{
 
 
 @media screen and (max-width: 768px) {
+	.additional_nav li:first-child{
+		margin-left: 1%;
+	}
+	.filters{
+		display: block;
+		position: fixed;
+		right: 0;
+		top: 0;
+		margin: 0;
+		bottom: 0;
+		-webkit-transform: translateX(100%);
+		-ms-transform: translateX(100%);
+		-o-transform: translateX(100%);
+		transform: translateX(100%) ;
+		-webkit-transition: all 1s;
+		-o-transition: all 1s;
+		transition: all 1s;
+		padding: 20px 30px 0 50px;
+	    width: 190px;
+	    height: auto;
+	    overflow-y: scroll;
+	}
+	.filters_opened .filters{
+		-webkit-transform: translateX(0%);
+		-ms-transform: translateX(0%);
+		-o-transform: translateX(0%);
+		transform: translateX(0%);
+	}
+	.filters_opened .close_filters{
+		display: block;
+		position: absolute;
+		right: 10px;
+		top: 10px;
+		width: 20px;
+		height: 20px;
+		/*background-color: red;*/
+		background-image: url(../images/filter_icon.png);
+	}
 	.basket_page__prod_wr, .basket_page__head {
     	padding: 0 5%;
     	-webkit-box-sizing: border-box;
@@ -1416,6 +1472,7 @@ div.main{
 		-ms-transform: translateX(0);
 		-o-transform: translateX(0);
 		transform: translateX(0);
+		overflow-y: scroll;
 	}
 	.head{
 		padding: 0;

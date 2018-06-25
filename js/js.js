@@ -1,5 +1,22 @@
 var Modules = (function(self){
 
+	self.haveFilters = function(filters){
+		if ($('.filters').length){
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
+
+	self.isMobail = function(winwidth) {
+        if(!winwidth) winwidth = 768;
+        var check = true;
+        if($(window).width() > 768) check = false;
+
+        return check;
+    };
+
     return self; 
     
 }(Modules || {}));
@@ -22,7 +39,9 @@ Modules.UltravioletTheme = (function(self,$){
 	}
 	var _docHeight;
 	var _animationEnd = 'animationEnd transitionEnd transitionend';
-	var _clickEvent = 'mousedown touchstart';
+	// var _clickEvent = 'mousedown touchstart';
+	var _clickEvent = 'click';
+
 
 	self._construct = function(params){
 
@@ -33,12 +52,12 @@ Modules.UltravioletTheme = (function(self,$){
 		_$classNames.closeThemeTogle = $(_classNames.closeThemeTogle);
 		_$classNames.document = $(document);		
 		
-		$(_$classNames.startThemeTogle).on(_clickEvent, function(e) {
+		_$classNames.startThemeTogle.on(_clickEvent, function(e) {
 			e.preventDefault();
 			self._makeScreenDark();
 		});
 
-		$(_$classNames.closeThemeTogle).on(_clickEvent, function(e) {
+		_$classNames.closeThemeTogle.on(_clickEvent, function(e) {
 			e.preventDefault();
 			self._makeScreenWhiteAgain();
 		});
@@ -51,8 +70,9 @@ Modules.UltravioletTheme = (function(self,$){
 	
 		_$classNames.themeClass.addClass(_classNames.startThemeClass);
 		_docHeight = _$classNames.document.height();
-		_$classNames.themeClass.height(_docHeight);		
+		_$classNames.themeClass.height(_docHeight);	
 
+		return self;
 	}
 
 	self._makeScreenWhiteAgain = function(){
@@ -63,6 +83,7 @@ Modules.UltravioletTheme = (function(self,$){
 			_$classNames.themeClass.removeClass(_classNames.closeThemeClass);
 		});
 
+		return self;
 	}
 
 	return {
@@ -81,6 +102,85 @@ Modules.UltravioletTheme = (function(self,$){
 
 
 Modules.ToggleFilters = (function(self,$){
+	var _classNames = {
+		toggleItem: '',
+		parentWrapper: '',
+		openFiltersClass: '',
+		filters: ''
+	}
+	var _$classNames = {
+		toggleItem: '',
+		parentWrapper: '',
+		filters: '',
+		window: ''
+	}
+	var _thisPage;
+	// var _clickEvent = 'mousedown touchstart';
+	var _clickEvent = 'click';
+	var _mobile;
+	var _windowWidth;
+
+
+	self._construct = function(params){
+
+        $.extend(_classNames, params);
+        _$classNames.toggleItem = $(_classNames.toggleItem);
+        _$classNames.parentWrapper = $(_classNames.parentWrapper);
+        _$classNames.filters = $(_classNames.filters);
+        _$classNames.window = $(window);
+        _thisPage = Modules.haveFilters(_$classNames.filters);
+
+
+        _$classNames.toggleItem.on(_clickEvent, function(e){
+        	e.preventDefault();
+        	_windowWidth = _$classNames.window.width();
+        	_mobile = Modules.isMobail(_windowWidth);
+        	self._checkCondition();
+        	return false;
+        });
+
+                
+
+        return self;
+
+    }
+
+    self._checkCondition = function(){
+    	if (_$classNames.parentWrapper.hasClass(_classNames.openFiltersClass)){
+    		if(_mobile) self._hideFilters();
+    		else self._hideFilters();
+    	}
+    	else{
+    		if(_mobile) self._showFilters();
+    		else self._showFilters();
+    	}
+
+    	return self;
+    }
+
+    self._hideFilters = function(){
+    	_$classNames.parentWrapper.removeClass(_classNames.openFiltersClass);
+
+    	return self;
+    }
+
+    self._showFilters = function(){
+    	_$classNames.parentWrapper.addClass(_classNames.openFiltersClass);
+
+    	return self;
+    }
+
+    return {
+
+        init: function(params){
+
+            self._construct(params);
+
+            return self;
+
+        }
+
+    }
 
 }(Modules.ToggleFilters || {}, jQuery));
 
@@ -122,5 +222,9 @@ $(document).ready(function(){
 
 	$(window).resize(footerSizing);
 	footerSizing();
+
+	// $('a').click(function(e){
+	// 	e.preventDefault();
+	// })
 
 });
