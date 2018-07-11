@@ -185,11 +185,16 @@ Modules.PossibleSlider = (function(self,$){
 
 	var _classNames = {
 		sliderWrapper: '',
-		sliderItem: ''
+		sliderItem: '',
+		sliderItemWrapper: '',
+		sliderInit: '',
+		owl: ''
 	}
 	var _$classNames = {
 		sliderWrapper: '',
-		sliderItem: ''
+		sliderItem: '',
+		sliderItemWrapper: '',
+		owl: ''
 	}
 
 	self._construct = function(params){
@@ -197,6 +202,8 @@ Modules.PossibleSlider = (function(self,$){
         $.extend(_classNames, params);
         _$classNames.sliderWrapper = $(_classNames.sliderWrapper);
         _$classNames.sliderItem = $(_classNames.sliderItem);
+        _$classNames.sliderItemWrapper = $(_classNames.sliderItemWrapper);
+        _$classNames.owl = $(_classNames.owl);
 
         self._checkNumberOfItems();  
 
@@ -206,7 +213,7 @@ Modules.PossibleSlider = (function(self,$){
 
     self._checkNumberOfItems = function(){
 
-    	if ((_$classNames.sliderItem.length)>=5){
+    	if ((_$classNames.sliderItem.length)>=6){
     		self._sliderInit();
     	}
 
@@ -216,20 +223,27 @@ Modules.PossibleSlider = (function(self,$){
 
     self._sliderInit = function(){
 
-		var owl = $(".owl-carousel").owlCarousel({
+		var owl = _$classNames.owl.owlCarousel({
 			items: 5,
-			loop: false,
+			loop: true,
 			dots: false,
 		  	nav: false,
-		  	// responsive:{
-		  	// 	768:{
-		  	// 		items:1
-		  	// 	},
-		  	// 	1100:{
-		  	// 		items:3
-		  	// 	}
-		  	// }
+		  	autoplay: true,
+		  	autoplayTimeout: 2000,
+		  	autoplayHoverPause: true,
+		  	autoplaySpeed: 2000,
+		  	responsive:{
+		  		768:{
+		  			items:5
+		  		},
+		  		0:{
+		  			items:1,
+		  			autoplayTimeout: 5000
+		  		}
+		  	}
 		});
+
+		_$classNames.owl.addClass(_classNames.sliderInit);
 
     	return self;
     }
@@ -249,11 +263,136 @@ Modules.PossibleSlider = (function(self,$){
 }(Modules.PossibleSlider || {}, jQuery));
 
 
+Modules.ImageMechanics = (function(self,$){
+
+	var _classNames = {
+		bigImage: '',
+        smallImg: '',
+        smallImgWrapper: '',
+        imgPopUp: '',
+        closeImg: '',
+        bigImageWrapper: '',
+        active: '',
+        imgOpen: ''
+	}
+	var _$classNames = {
+		bigImage: '',
+        smallImg: '',
+        smallImgWrapper: '',
+        imgPopUp: '',
+        closeImg: '',
+        bigImageWrapper: '',
+        imgOpen: ''
+	}
+	var dataGetAttr;
+	var dataPath;
+	var dataAttr;
+	var _clickEvent = 'click';
+	var clickedElem;
+	var _this;
+	var $imgToUp;
+	var bigImgWrHeight;
+
+	self._construct = function(params){
+
+        $.extend(_classNames, params);
+        _$classNames.bigImage = $(_classNames.bigImage);
+        _$classNames.smallImg = $(_classNames.smallImg);
+        _$classNames.smallImgWrapper = $(_classNames.smallImgWrapper);
+        _$classNames.imgPopUp = $(_classNames.imgPopUp);
+        _$classNames.closeImg = $(_classNames.closeImg);
+        _$classNames.bigImageWrapper = $(_classNames.bigImageWrapper);
+        _$classNames.imgOpen = $(_classNames.imgOpen);
+
+        _$classNames.smallImg.on(_clickEvent, function(){
+        	_this = this;
+        	dataAttr = 'id';
+        	self._getDataAttr(_this, dataAttr);
+        	self._changeBigImage();
+        });
+
+        _$classNames.bigImage.on(_clickEvent, function(){        	
+        	_this = this;
+        	dataAttr = 'path';
+        	self._getDataAttr(_this, dataAttr);
+        	self._openBigImage();
+        });
+
+        return self;
+
+    }
+
+    self._changeBigImage = function(){
+
+    	$imgToUp = _$classNames.bigImageWrapper.find('[data-id="' + dataGetAttr + '"]');
+
+    	bigImgWrHeight = _$classNames.bigImageWrapper.outerHeight();
+
+    	_$classNames.bigImage.removeClass(_classNames.active);
+    	$imgToUp.addClass(_classNames.active);
+
+    	if(bigImgWrHeight>_$classNames.bigImageWrapper.height())
+    		_$classNames.bigImageWrapper.height(bigImgWrHeight);
+
+    	return self;
+
+    }
+
+    self._getDataAttr = function(_this, dataAttr){
+    	console.log(dataAttr)
+
+    	dataGetAttr = $(_this).data(dataAttr);
+    	console.log(dataGetAttr)
+
+    	return self;
+
+    }
+
+    self._openBigImage = function(){
+
+    	_$classNames.imgPopUp.addClass(_classNames.active)
+    	_$classNames.imgOpen.attr('src', dataGetAttr )
+
+		_$classNames.closeImg.on(_clickEvent, function(e){
+			e.preventDefault();
+			self._closeBigImage();
+		});	
+
+    	return self;
+
+    }
+
+    self._closeBigImage = function(){
+
+    	_$classNames.imgPopUp.removeClass(_classNames.active)
+
+    	return self;
+
+    }
+
+    return {
+
+        init: function(params){
+
+            self._construct(params);
+
+            return self;
+
+        }
+
+    }
+
+}(Modules.ImageMechanics || {}, jQuery));
+
+
 (function($){
 	$(function(){
     	var possibleSlider = new Modules.PossibleSlider.init({
             sliderWrapper: '.similiar_prods',
-            sliderItem: '.sim__prod'
+            sliderItem: '.sim__prod',
+            sliderItemWrapper: '.similiar_prods li',
+            sliderInit: 'owled',
+            owl: '.owl-carousel'
     	});
     });
     $(function(){
@@ -273,6 +412,18 @@ Modules.PossibleSlider = (function(self,$){
             filters: '.filters'
     	});
     });
+    $(function(){
+    	var imageMechanics = new Modules.ImageMechanics.init({
+            bigImage: '.big_img_wr img',
+            bigImageWrapper: '.big_img_wr',
+            smallImg: '.small_img_wr img',
+            smallImgWrapper: '.small_img_wr',
+            imgPopUp: '.img_pop_up',
+            imgOpen: '.img_pop_up img',
+            closeImg: '.img_pop_up__close',
+            active: 'active'
+    	});
+    });
 })(jQuery);
 
 
@@ -286,7 +437,6 @@ $(document).ready(function(){
 
 	function footerSizing() {
 		var footerHeight = $('.footer').height();
-		console.log(footerHeight);
 		$('section').last().css('margin-bottom', footerHeight + 'px');
 	}
 
