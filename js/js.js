@@ -233,9 +233,12 @@ Modules.PossibleSlider = (function(self,$){
 		  	autoplayHoverPause: true,
 		  	autoplaySpeed: 2000,
 		  	responsive:{
-		  		768:{
+		  		1025:{
 		  			items:5
 		  		},
+                768:{
+                    items:3
+                },
 		  		0:{
 		  			items:1,
 		  			autoplayTimeout: 5000
