@@ -1405,6 +1405,28 @@ a{
 	text-decoration: underline;
 }
 
+.examples_wr{
+	margin-left: -3%;
+	width: 106%;
+	float: left;
+}
+
+.examples_wr .owl-item{
+	float: left;
+}
+
+.examples_wr .disabled{
+	display: none;
+}
+
+/*.examples_wr .owl-item{
+	width: 1600px !important;
+}*/
+
+.examples_wr .owl-item img{
+	width: 100%;
+}
+
 @media screen and (max-width: 1129px) {
 	.basket_page__form .basket_page__desc{
 		display: block;

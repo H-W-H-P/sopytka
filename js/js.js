@@ -266,6 +266,70 @@ Modules.PossibleSlider = (function(self,$){
 }(Modules.PossibleSlider || {}, jQuery));
 
 
+Modules.PossibleSliderExamples = (function(self,$){
+
+    var _classNames = {
+        sliderWrapper: '',
+        sliderItem: '',
+        owl: ''
+    }
+    var _$classNames = {
+        sliderWrapper: '',
+        sliderItem: '',
+        owl: ''
+    }
+
+    self._construct = function(params){
+
+        $.extend(_classNames, params);
+        _$classNames.sliderWrapper = $(_classNames.sliderWrapper);
+        _$classNames.sliderItem = $(_classNames.sliderItem);
+        _$classNames.owl = $(_classNames.owl);
+
+        self._checkNumber();  
+
+        return self;
+
+    }
+
+    self._checkNumber = function(){
+
+        if ((_$classNames.sliderItem.length)>=2){
+            self._sliderInit();
+        }
+
+        return self;
+
+    }
+
+    self._sliderInit = function(){
+
+        var owl = _$classNames.owl.owlCarousel({
+            loop: false,
+            dots: false,
+            nav: false,
+            autoplay: false,
+            items: 1
+        });
+
+        return self;
+    }
+
+    return {
+
+        init: function(params){
+
+            self._construct(params);
+
+            return self;
+
+        }
+
+    }
+
+}(Modules.PossibleSliderExamples || {}, jQuery));
+
+
 Modules.ImageMechanics = (function(self,$){
 
 	var _classNames = {
@@ -397,6 +461,13 @@ Modules.ImageMechanics = (function(self,$){
             sliderInit: 'owled',
             owl: '.owl-carousel'
     	});
+    });
+    $(function(){
+        var possibleSliderExamples = new Modules.PossibleSliderExamples.init({
+            sliderWrapper: '.examples_wr',
+            sliderItem: '.examples_wr img',
+            owl: '.examples_wr'
+        });
     });
     $(function(){
     	var ultravioletTheme = new Modules.UltravioletTheme.init({
