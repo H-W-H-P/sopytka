@@ -5,6 +5,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Document</title>
 	<link href="https://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="css/owl.carousel.min.css">
 	<link rel="stylesheet" href="css/owl.theme.default.min.css">
 	<link rel="stylesheet" href="css/index.css">
@@ -23,6 +24,7 @@
 			<a href="index.html" class="logo">
 				<img src="images/sopytka_logo.png" alt="logo">
 			</a>
+			<div class="dark_phone"></div>
 		</div>
 
 		<div class="head__cont">
@@ -60,7 +62,13 @@
 		</div>
 
 		<nav class="head__nav navigation">
+
 			<ul class="navigation__list">
+				<a class="burgerbutton-open burgerbutton active">
+					<span></span>
+					<span></span>
+					<span></span>
+				</a>
 				<li class="navigation__item">
 					<a href="page.html" class="link">Полипропиленовые трубы и фитинги</a>
 				</li>
@@ -137,7 +145,7 @@
 			</div>
 
 			<div class="dark__video">
-				<iframe width="100%" height="100%" src="https://www.youtube.com/embed/z0EY-vQXRwc" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+				<iframe width="100%" height="100%" src="https://www.youtube.com/embed/8uKvqHS6iNM?iv_load_policy=3&showinfo=0&rel=0&modestbranding=0" src="" frameborder="0" controls="0" allowfullscreen></iframe>
 			</div>
 		</div>
 
@@ -153,6 +161,15 @@
 	</section>
 
 	<section class="product_page">
+
+		<div class="product_page__mob_header product_page__desc">
+			<div class="path_cont">
+				<a href="">Главная</a>
+				<span>/</span>
+				<a href="">Пластик для 3D принтера</a>
+			</div>
+			<h1>ABS пластик <br /> «Аленький цветочек»</h1>
+		</div>
 		
 		<div class="product_page__img">
 			<div class="big_img_wr">
@@ -168,54 +185,107 @@
 		</div>
 
 		<div class="product_page__desc">
-			<div class="path_cont">
-				<a href="">Главная</a>
-				<span>/</span>
-				<a href="">Пластик для 3D принтера</a>
-			</div>
-			<h1>ABS пластик <br /> «Аленький цветочек»</h1>
-
-			<a href="#" class="ultraviolet">Светится под ультрафиолетом</a>
-
-			<ul class="avail_chars">
-				<li class="characteristic">
-					<span class="char__name">Диаметр, мм</span>
-					<ul class="char__params">
-						<li><a href="" class="char__param choosed_param">1.75</a></li>
-						<li><a href="" class="char__param">2</a></li>
-						<li><a href="" class="char__param">3</a></li>
-					</ul>
-				</li>
-				<li class="characteristic">
-					<span class="char__name">Диаметр, мм</span>
-					<ul class="char__params">
-						<li><a href="" class="char__param choosed_param">1.75</a></li>
-						<li><a href="" class="char__param">2</a></li>
-						<li><a href="" class="char__param">3</a></li>
-					</ul>
-				</li>
-				<div class="add_chars">
-					<ul>
-						<li>
-							<span class="add_char__name">Материал</span>
-							<span class="add_char__value">Никотинамидеденинденуклеотид</span>
-						</li>
-						<li>
-							<span class="add_char__name">Материал</span>
-							<span class="add_char__value">Никотинамидеденинденуклеотид</span>
-						</li>
-						<li>
-							<span class="add_char__name">Материал</span>
-							<span class="add_char__value">Никотинамидеденинденуклеотид</span>
-						</li>
-						<li>
-							<span class="add_char__name">Материал</span>
-							<span class="add_char__value">Никотинамидеденинденуклеотид</span>
-						</li>
-					</ul>
+			<div class="product_page__header">
+				<div class="path_cont">
+					<a href="">Главная</a>
+					<span>/</span>
+					<a href="">Пластик для 3D принтера</a>
 				</div>
-			</ul>
+				<h1>ABS пластик <br /> «Аленький цветочек»</h1>
+			</div>	
 
+			<!-- <a href="#" class="ultraviolet">Светится под ультрафиолетом</a> -->
+
+			<!-- <form action=""> -->
+			<table class="avail_chars">
+				<tr>
+					<td>
+						<span class="char__name">Диаметр, мм</span>
+					</td>
+					<td>
+						<form action="">
+							<label class="container">1
+							  <input type="radio" checked="checked" name="radio">
+							  <span class="checkmark">1</span>
+							</label>
+							<label class="container">1.75
+							  <input type="radio" name="radio">
+							  <span class="checkmark">1.75</span>
+							</label>
+							<label class="container">1.3333
+							  <input type="radio" name="radio">
+							  <span class="checkmark">1.3333</span>
+							</label>
+							<label class="container">3
+							  <input type="radio" name="radio">
+							  <span class="checkmark">3</span>
+							</label>
+						</form>
+					</td>
+				</tr>						
+				<tr>
+					<td>
+						<span class="char__name">Диаметр, мм а тут ещё несколько слов для длины</span>
+					</td>
+					<td>
+						<form action="">
+							<label class="container">11.2222
+							  <input type="radio" checked="checked" name="radio">
+							  <span class="checkmark">11.2222</span>
+							</label>
+							<label class="container">1.75
+							  <input type="radio" name="radio">
+							  <span class="checkmark">1.75</span>
+							</label>
+							<label class="container">1.3333
+							  <input type="radio" name="radio">
+							  <span class="checkmark">1.3333</span>
+							</label>
+							<label class="container">3
+							  <input type="radio" name="radio">
+							  <span class="checkmark">3</span>
+							</label>
+						</form>
+					</td>
+				</tr>
+			<!-- </table>
+
+		
+			<div class="add_chars">
+				<table> -->
+				<tr>
+					<td class="add_char__name">
+						Материал
+					</td>
+					<td class="add_char__value">
+						Акрилонитрилбутадиенстирол
+					</td>
+				</tr>
+				<tr>
+					<td class="add_char__name">
+						Плотность
+					</td>
+					<td class="add_char__value">
+						1,05 г/см³
+					</td>
+				</tr>
+				<tr>
+					<td class="add_char__name">
+						Темп. экструзии
+					</td>
+					<td class="add_char__value">
+						245 - 260 °С
+					</td>
+				</tr>
+				<tr>
+					<td class="add_char__name">
+						Тепл. изделия
+					</td>
+					<td class="add_char__value">
+						105 °C
+					</td>
+				</tr>
+			</table>
 			<span class="price_big">
 				458 руб.
 			</span>
@@ -223,81 +293,84 @@
 			<a href="#" class="add_to_basket">
 				Добавить в корзину
 			</a>
+		<!-- </form> -->
 
 			<div class="add_chars">
 				<h6>Дополнительные характеристики</h6>
-				<ul>
-					<li>
-						<span class="add_char__name">Материал</span>
-						<span class="add_char__value">Никотинамидеденинденуклеотид</span>
-					</li>
-					<li>
-						<span class="add_char__name">Материал</span>
-						<span class="add_char__value">Никотинамидеденинденуклеотид</span>
-					</li>
-					<li>
-						<span class="add_char__name">Материал</span>
-						<span class="add_char__value">Никотинамидеденинденуклеотид</span>
-					</li>
-					<li>
-						<span class="add_char__name">Материал</span>
-						<span class="add_char__value">Никотинамидеденинденуклеотид</span>
-					</li>
-					<li>
-						<span class="add_char__name">Материал</span>
-						<span class="add_char__value">Никотинамидеденинденуклеотид</span>
-					</li>
-					<li>
-						<span class="add_char__name">Материал</span>
-						<span class="add_char__value">Никотинамидеденинденуклеотид</span>
-					</li>
-					<li>
-						<span class="add_char__name">Материал</span>
-						<span class="add_char__value">Никотинамидеденинденуклеотид</span>
-					</li>
-					<li>
-						<span class="add_char__name">Материал</span>
-						<span class="add_char__value">Никотинамидеденинденуклеотид</span>
-					</li>
-					<li>
-						<span class="add_char__name">Материал</span>
-						<span class="add_char__value">Никотинамидеденинденуклеотид</span>
-					</li>
-					<li>
-						<span class="add_char__name">Материал</span>
-						<span class="add_char__value">Никотинамидеденинденуклеотид</span>
-					</li>
-				</ul>
+				<table>
+					<tr>
+						<td class="add_char__name">
+							Вес брутто
+						</td>
+						<td class="add_char__value">
+							1100 г
+						</td>
+					</tr>
+					<tr>
+						<td class="add_char__name">
+							Мин. партия 
+						</td>
+						<td class="add_char__value">
+							Одна катушка две катушки, три катушки? четыре катушки, пять катушек
+						</td>
+					</tr>
+					<tr>
+						<td class="add_char__name">
+							Упаковка упаковка упаковка упковка упаковка упкова
+						</td>
+						<td class="add_char__value">
+							zip пакет, коробка
+						</td>
+					</tr>
+					<tr>
+						<td class="add_char__name">
+							Производитель, производитель производитель
+						</td>
+						<td class="add_char__value">
+							Завод «ФДпласт», Россия
+						</td>
+					</tr>
+				</table>
 			</div>
 		</div>
 
 		<div class="product_page__about">
-			<div class="about__desc">
-				<ul>
-					<li>asdsad ada sdas dasd asdasdawda wdasd asf adfs dfsf asda sd</li>
-					<li>asdsad ada sdas dasd asdasdawda wdasd asf adfs dfsf asda sd</li>
-					<li>asdsad ada sdas dasd asdasdawda wdasd asf adfs dfsf asda sd</li>
-					<li>asdsad ada sdas dasd asdasdawda wdasd asf adfs dfsf asda sdasdsad ada sdas dasd asdasdawda wdasd asf adfs dfsf asda sd</li>
-					<li>asdsad ada sdas dasd asdasdawda wdasd asf adfs dfsf asda sd</li>
-					<li>asdsad ada sdas dasd asdasdawda wdasd asf adfs dfsf asda sd</li>
-				</ul>
-				<h2 class="about__desc-title">Приемущества</h2>
-				<ul>
-					<li>asdsad ada sdas dasd asdasdawda wdasd asf adfs dfsf asda sd</li>
-					<li>asdsad ada sdas dasd asdasdawda wdasd asf adfs dfsf asda sd</li>
-					<li>asdsad ada sdas dasd asdasdawda wdasd asf adfs dfsf asda sd asdsad ada sdas dasd asdasdawda wdasd asf adfs dfsf asda sd</li>
-					<li>asdsad ada sdas dasd asdasdawda wdasd asf adfs dfsf asda sd</li>
-					<li>asdsad ada sdas dasd asdasdawda wdasd asf adfs dfsf asda sd asdsad ada sdas dasd asdasdawda wdasd asf adfs dfsf asda sd asdsad ada sdas dasd asdasdawda wdasd asf adfs dfsf asda sd asdsad ada sdas dasd asdasdawda wdasd asf adfs dfsf asda sd asdsad ada sdas dasd asdasdawda wdasd asf adfs dfsf asda sd</li>
-					<li>asdsad ada sdas dasd asdasdawda wdasd asf adfs dfsf asda sd asdsad ada sdas dasd asdasdawda wdasd asf adfs dfsf asda sd asdsad ada sdas dasd asdasdawda wdasd asf adfs dfsf asda sd</li>
-				</ul>
-			</div>
 			<div class="about__video">
-				<iframe width="100%" height="100%" src="https://www.youtube.com/embed/iWGL3mPE114" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+				<iframe width="100%" height="100%" src="https://www.youtube.com/embed/z_9QiHNyFeE" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 			</div>
+			<div class="about__desc">
+				<div class="desc_wr">
+					<h2 class="about__desc-title">Применение</h2>
+					<ul>
+						<li>Модуль упругости при изгибе: 2,3 Гпа</li>
+						<li>Адгезив: клей БФ-2, раствор ABS-пластика в ацетоне, столярный клей PVA</li>
+						<li>Наличие сменных стекол под размеры стола</li>
+						<li>Печать: в термокамере (рекомендуется)</li>
+						<li>Постобработка: химическая, механическая</li>
+						<li>Обработка: полиэфирные шпатлевки, акриловые грунты и краски</li>
+					</ul>
+				</div>
+				<div class="desc_wr">
+					<h2 class="about__desc-title">Приемущества</h2>
+					<ul>
+						<li>Отличная механическая прочность, ударная стойкость</li>
+						<li>Высокая жесткость</li>
+						<li>Диапазон эксплуатационных температур от -40 °С до +100 °С</li>
+						<li>Стойкость к щелочам, кислотам, маслам</li>
+						<li>Возможность осуществления постобработки напечатанных изделий механическим и химическим способами</li>
+						<li>Гигроскопичность. Требуется хранение материала в герметичной упаковке с силикагелем. В случае хранения материла вне упаковки необходимо производить сушку прутка в течение 4 часов при температуре 75 °C</li>
+					</ul>
+				</div>
+			</div>
+			<!-- <div class="about__video">
+				<iframe width="100%" height="100%" src="https://www.youtube.com/embed/z_9QiHNyFeE" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+			</div> -->
 		</div>
+		<h2 class="examples__cap">Примеры работ</h2>
 		<div class="examples_wr">
 			<img src="images/example.jpg" width="100%" alt="">
-			<img src="images/example2.jpeg" width="100%" alt="">
+			<img src="images/example.jpg" width="100%" alt="">
+			<!-- <img src="images/example2.jpeg" width="100%" alt=""> -->
 		</div>
 		<div class="similiar_prods">
 			<h2 class="similiar_prods__title">
@@ -308,7 +381,7 @@
 				<li>
 					<a href="" class="sim__prod">
 						<img src="images/product.png" alt="">
-						<span class="sim__desc">Какой-то там пластик 1.75 мм, 1000 г</span>
+						<span class="sim__desc">ABS пластик «Бархатная роза» 1.75 мм, 1000 г</span>
 						
 					</a>
 					<span class="sim__price">398 руб</span>
@@ -317,7 +390,7 @@
 				<li>
 					<a href="" class="sim__prod">
 						<img src="images/product.png" alt="">
-						<span class="sim__desc">Какой-то там пластик 1.75 мм, 1000 г</span>
+						<span class="sim__desc">ABS пластик «Бархатная роза» 1.75 мм, 1000 г</span>
 						
 					</a>
 					<span class="sim__price">398 руб</span>
@@ -326,7 +399,7 @@
 				<li>
 					<a href="" class="sim__prod">
 						<img src="images/product.png" alt="">
-						<span class="sim__desc">Какой-то там пластик 1.75 мм, 1000 г</span>
+						<span class="sim__desc">ABS пластик «Бархатная роза» 1.75 мм, 1000 г</span>
 						
 					</a>
 					<span class="sim__price">398 руб</span>
@@ -335,7 +408,7 @@
 				<li>
 					<a href="" class="sim__prod">
 						<img src="images/product.png" alt="">
-						<span class="sim__desc">Какой-то там пластик 1.75 мм, 1000 г, а тут больше текста</span>
+						<span class="sim__desc">ABS пластик «Бархатная роза» 1000 г, а тут больше текста для проверки</span>
 					</a>
 					<span class="sim__price">398 руб</span>
 					<a href="#" class="sim__add_to_basket">В корзину</a>
@@ -343,7 +416,7 @@
 				<li>
 					<a href="" class="sim__prod">
 						<img src="images/product.png" alt="">
-						<span class="sim__desc">Какой-то там пластик 1.75 мм, 1000 г</span>
+						<span class="sim__desc">ABS пластик «Бархатная роза» 1.75 мм, 1000 г</span>
 					</a>
 						<span class="sim__price">398 руб</span>
 					<a href="#" class="sim__add_to_basket">В корзину</a>
@@ -351,7 +424,7 @@
 				<li>
 					<a href="" class="sim__prod">
 						<img src="images/product.png" alt="">
-						<span class="sim__desc">Какой-то там пластик 1.75 мм, 1000 г</span>
+						<span class="sim__desc">ABS пластик «Бархатная роза» 1.75 мм, 1000 г</span>
 					</a>
 						<span class="sim__price">398 руб</span>
 					<a href="#" class="sim__add_to_basket">В корзину</a>
@@ -373,16 +446,16 @@
 				</ul>
 			</div>
 			<div class="footer__center">
-				<p>По всем вопросам и предложениям писать на info@sopytka.ru</p>
-				<p>+7 499 258-52-02</p>
+				<p>По всем вопросам и предложениям писать на <a href="mailto:info@sopytka.ru">info@sopytka.ru</a></p>
+				<p><a href="tel:+7 499 258-52-02"> +7 499 258-52-02</a></p>
 			</div>
 			<div class="footer__right">
 				<span>Поддержать нас в соц.сетях:</span>
 				<ul>
-					<li></li>
-					<li></li>
-					<li></li>
-					<li></li>
+					<li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+					<li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+					<li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+					<li><a href="#"><i class="fa fa-vk" aria-hidden="true"></i></a></li>
 				</ul>
 			</div>
 			<div class="footer__left">
