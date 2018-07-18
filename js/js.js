@@ -29,13 +29,15 @@ Modules.UltravioletTheme = (function(self,$){
 		closeThemeClass: '',
 		themeClass: '',
 		startThemeTogle: '',
-		closeThemeTogle: ''
+		closeThemeTogle: '',
+        overflowHTML: '',
 	}
 	var _$classNames = {
 		themeClass: '',
 		startThemeTogle: '',
 		closeThemeTogle: '',
-		document: ''
+		document: '',
+        htmlBody: ''
 	}
 	var _docHeight;
 	var _animationEnd = 'animationEnd transitionEnd transitionend';
@@ -50,7 +52,8 @@ Modules.UltravioletTheme = (function(self,$){
 		_$classNames.themeClass = $(_classNames.themeClass);
 		_$classNames.startThemeTogle = $(_classNames.startThemeTogle);
 		_$classNames.closeThemeTogle = $(_classNames.closeThemeTogle);
-		_$classNames.document = $(document);		
+		_$classNames.document = $(document);
+        _$classNames.htmlBody = $('html, body');		
 		
 		_$classNames.startThemeTogle.on(_clickEvent, function(e) {
 			e.preventDefault();
@@ -69,8 +72,9 @@ Modules.UltravioletTheme = (function(self,$){
 	self._makeScreenDark = function(){
 	
 		_$classNames.themeClass.addClass(_classNames.startThemeClass);
-		_docHeight = _$classNames.document.height();
-		_$classNames.themeClass.height(_docHeight);	
+		_docHeight = _$classNames.themeClass.height();
+		_$classNames.htmlBody.height(_docHeight).addClass(_classNames.overflowHTML);
+        _$classNames.htmlBody.animate({scrollTop: _$classNames.themeClass.offset().top})
 
 		return self;
 	}
@@ -79,6 +83,7 @@ Modules.UltravioletTheme = (function(self,$){
 
 		_$classNames.themeClass.removeClass(_classNames.startThemeClass);
 		_$classNames.themeClass.addClass(_classNames.closeThemeClass);
+        _$classNames.htmlBody.height('auto').removeClass(_classNames.overflowHTML);
 		_$classNames.themeClass.on(_animationEnd, function(){
 			_$classNames.themeClass.removeClass(_classNames.closeThemeClass);
 		});
@@ -468,7 +473,110 @@ Modules.ImageMechanics = (function(self,$){
 }(Modules.ImageMechanics || {}, jQuery));
 
 
+Modules.BasketMechanics = (function(self,$){
+
+    var _classNames = {
+        removeELement: '',
+        addElement: '',
+        basketItem: '',
+        basketPage: '',
+        basketEmpty: ''
+    }
+    var _$classNames = {
+        removeELement: '',
+        addElement: '',
+        basketItem: '',
+        basketPage: ''
+    }
+    var pathToPHP;
+    var _clickEvent = 'click';
+
+    self._construct = function(params){
+
+        $.extend(_classNames, params);
+        _$classNames.removeELement = $(_classNames.removeELement);
+        _$classNames.addElement = $(_classNames.addElement);
+        _$classNames.basketItem = $(_classNames.basketItem);
+        _$classNames.basketPage = $(_classNames.basketPage);
+
+        _$classNames.removeELement.on(_clickEvent, function(e){
+            e.preventDefault();
+            _this = this;
+            self._removeItem(_this);
+        });
+
+        _$classNames.addElement.on(_clickEvent, function(){  
+            e.preventDefault();
+            _this = this;
+            self._addItemPHP(_this);
+        });
+
+        return self;
+
+    }
+
+    self._removeItem = function(_this){
+
+        $(_this).closest(_classNames.basketItem).remove();
+
+        self._checkBasketForItems();
+        self._removeItemPHP(_this);
+
+        return self;
+
+    }
+
+    self._checkBasketForItems = function(){
+
+        if ($(_classNames.basketItem).length === 0) {
+            _$classNames.basketPage.addClass(_classNames.basketEmpty)
+        }
+
+        return self;
+
+    }
+
+    self._removeItemPHP = function(){
+
+        
+
+        return self;
+
+    }
+
+    self._addItemPHP = function(){
+
+        
+
+        return self;
+
+    }
+
+    return {
+
+        init: function(params){
+
+            self._construct(params);
+
+            return self;
+
+        }
+
+    }
+
+}(Modules.BasketMechanics || {}, jQuery));
+
+
 (function($){
+    $(function(){
+        var basketMechanics = new Modules.BasketMechanics.init({
+            removeELement: '.basket_page__item_remove',
+            addElement: '.add_to_basket',
+            basketItem: '.basket_page__item',
+            basketEmpty: 'basketEmpty',
+            basketPage: '.basket_page'
+        });
+    });
 	$(function(){
     	var possibleSlider = new Modules.PossibleSlider.init({
             sliderWrapper: '.similiar_prods',
@@ -491,7 +599,8 @@ Modules.ImageMechanics = (function(self,$){
             closeThemeClass: 'dark-off',
             themeClass: '.dark',
             startThemeTogle: '.ultraviolet',
-            closeThemeTogle: '.dark_off'
+            closeThemeTogle: '.dark_off',
+            overflowHTML: 'overflow_violet'
     	});
     });
     $(function(){
@@ -575,8 +684,8 @@ $(document).ready(function(){
     }
 
     horizontalFilters();
-
-	$(window).resize(footerSizing, horizontalFilters);
+	$(window).resize(horizontalFilters);
+    $(window).resize(footerSizing);
 	footerSizing();
 
 	// $('a').click(function(e){
