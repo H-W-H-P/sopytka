@@ -57,7 +57,7 @@
 	</header>
 
 	<section class="basket_page">
-		<div class="basket_page__head">
+		<!-- <div class="basket_page__head">
 
 			<p class="basket_page__img"></p>
 			<p class="basket_page__product">Товар</p>
@@ -66,13 +66,13 @@
 			<p class="basket_page__number">Кол-во</p>
 			<p class="basket_page__symbol"></p>
 			<p class="basket_page__full_price">Стоимость</p>
-			<p class="basket_page__symbol"></p>
+			<p class="basket_page__symbol"></p> -->
 			
-		</div>
+		<!-- </div>
 		<p class="basket_page__desc">В корзине 2 товара на сумму 85.65 руб</p>
 		<div class="basket_page__prod_wr">
-			<ul>
-				<li class="basket_page__item">
+			<ul> -->
+			<!-- 	<li class="basket_page__item">
 					<p class="basket_page__img">
 						<img src="images/prod.jpg" alt="">
 					</p>
@@ -161,9 +161,112 @@
 					<a href="" class="basket_page__item_remove">
 						<img src="images/remove.png" alt="">
 					</a>
-				</li>
+				</li> -->
+				<table class="bascket__table">
+					<tr class="basket_page__head">
+						<td class="basket_page__img"></td>
+						<td class="basket_page__product">Товар</td>
+						<td class="basket_page__price">Цена</td>
+						<td class="basket_page__symbol"></td>
+						<td class="basket_page__number">Кол-во</td>
+						<td class="basket_page__symbol"></td>
+						<td class="basket_page__full_price">Стоимость</td>
+						<td></td>
+					</tr>
+					<tr class="basket_page__item">
+						<td class="basket_page__img">
+							<img src="images/prod.jpg" alt="">
+						</td>
+						<td class="basket_page__product">
+							<a href="#">product's name the most longiest name in my life</a>
+							<p>
+								<span class="prod_char_1">color</span>
+								<span>:</span>
+								<span class="prod_cond_1">white</span>
+							</p>
+							<p>
+								<span class="prod_char_2">diameter is really important thing to know</span>
+								<span>:</span>
+								<span class="prod_cond_2">32 santimeters and 30 milimiters</span>
+							</p>
+						</td>
+						<td class="basket_page__price">24.43 rub</td>
+						<td class="basket_page__symbol">x</td>
+						<td class="basket_page__number">
+							<input type="number" min="1" step="1" value="1" maxlength="10" class="textBox js-item-quantity" data-item-id="337180" style="width:50px" title="Количество товара">
+						</td>
+						<td class="basket_page__symbol">=</td>
+						<td class="basket_page__full_price">24.43 rub</td>
+						<td>
+							<a href="" class="basket_page__item_remove">
+								<!-- <img src="images/remove.png" alt=""> -->
+							</a>
+						</td>
+					</tr>
+					<tr class="basket_page__item">
+						<td class="basket_page__img">
+							<img src="images/prod.jpg" alt="">
+						</td>
+						<td class="basket_page__product">
+							<a href="#">product's name</a>
+							<p>
+								<span class="prod_char_1">color</span>
+								<span>:</span>
+								<span class="prod_cond_1">white</span>
+							</p>
+							<p>
+								<span class="prod_char_2">diameter</span>
+								<span>:</span>
+								<span class="prod_cond_2">32sm</span>
+							</p>
+						</td>
+						<td class="basket_page__price">24.431212 rub</td>
+						<td class="basket_page__symbol">x</td>
+						<td class="basket_page__number">
+							<input type="number" min="1" step="1" value="1" maxlength="10" class="textBox js-item-quantity" data-item-id="337180" style="width:50px" title="Количество товара">
+						</td>
+						<td class="basket_page__symbol">=</td>
+						<td class="basket_page__full_price">24.431212 rub</td>
+						<td>
+							<a href="" class="basket_page__item_remove">
+								<img src="images/remove.png" alt="">
+							</a>
+						</td>
+					</tr>
+					<tr class="basket_page__item">
+						<td class="basket_page__img">
+							<img src="images/prod.jpg" alt="">
+						</td>
+						<td class="basket_page__product">
+							<a href="#">product's name</a>
+							<p>
+								<span class="prod_char_1">color</span>
+								<span>:</span>
+								<span class="prod_cond_1">white, blue, red, green, pink, blue, red, green, pink</span>
+							</p>
+							<p>
+								<span class="prod_char_2">diameter</span>
+								<span>:</span>
+								<span class="prod_cond_2">32sm</span>
+							</p>
+						</td>
+						<td class="basket_page__price">24.43 rub</td>
+						<td class="basket_page__symbol">x</td>
+						<td class="basket_page__number">
+							<input type="number" min="1" step="1" value="1" maxlength="10" class="textBox js-item-quantity" data-item-id="337180" style="width:50px" title="Количество товара">
+						</td>
+						<td class="basket_page__symbol">=</td>
+						<td class="basket_page__full_price">24.43 rub</td>
+						<td>
+							<a href="" class="basket_page__item_remove">
+								<img src="images/remove.png" alt="">
+							</a>
+						</td>
+					</tr>
+				</table>
 			</ul>
 		</div>
+		<p class="basket_page__desc">В корзине 2 товара на сумму 85.65 руб</p>
 		<div class="basket_page__form">
 			<p class="basket_page__desc">В корзине 2 товара на сумму 85.65 руб</p>
 			<form name="order_type" class="form_for_order" method="post" action="" novalidate="novalidate" enctype="multipart/form-data">
