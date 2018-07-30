@@ -633,7 +633,24 @@ Modules.BasketMechanics = (function(self,$){
 })(jQuery);
 
 
+function footerFixed() {
+    var pageHeight = $('html').height();    
+    var footerHeight = $('footer').height();
+    var windowHeight = $(window).height();
+    var pageWOFooter = pageHeight - footerHeight;
+    // var pageWFooter = pageHeight + footerHeight;
+    if (pageWOFooter <= windowHeight) {
+        $('.footer').removeAttr('data-parallax').addClass('no_trs').css('transform', 'none');        
+    }
+    else if (pageHeight <= windowHeight) {
+        $('footer').addClass('fixed');
+    }
+}
+
+
 $(document).ready(function(){
+
+    
 
 	$(document).on("click", ".burgerbutton", function (e) {
 		e.preventDefault();
@@ -643,13 +660,13 @@ $(document).ready(function(){
 	});
 
     $('.about__desc-title').click(function(){
-        if ($(window).width()<=560){
+        if ($(window).width()<=1023){
             $(this).closest('.desc_wr').toggleClass('opened');
         }
     });
 
     $('.examples__cap').click(function(){
-        if ($(window).width()<=560){
+        if ($(window).width()<=1023){
             $('.examples_wr').toggleClass('opened');
             $(this).toggleClass('opened');
         }
@@ -706,6 +723,9 @@ $(document).ready(function(){
     laningProds();
     $(window).resize(laningProds);
     $('.toggle_filters').click(laningProds)
+
+    $(window).resize(footerFixed);
+    footerFixed();
 
     // function footerSizing() {
     //  var footerHeight = $('.footer').height();
