@@ -305,7 +305,7 @@ var ParallaxScroll = {
                 var rotate3d = "rotateX(" + (properties["rotateX"] ? properties["rotateX"] : 0) + "deg) rotateY(" + (properties["rotateY"] ? properties["rotateY"] : 0) + "deg) rotateZ(" + (properties["rotateZ"] ? properties["rotateZ"] : 0) + "deg)";
                 // var scale3d = "scaleX(" + properties["scaleX"] + ") scaleY(" + properties["scaleY"] + ") scaleZ(" + properties["scaleZ"] + ")";
                 var cssTransform = translate3d + " " + rotate3d + " " + ";";
-                var opacity = properties["scaleX"] - 1;
+                var opacity = properties["scaleX"] - .7;
                 this._log(cssTransform);
                 $el.attr("style", "transform:" + cssTransform + " -webkit-transform:" + cssTransform + "opacity:" + opacity + " " + style);
                 // $el.attr("style", "opacity:" + opacity + " " + style);

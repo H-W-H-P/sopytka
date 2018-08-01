@@ -526,6 +526,7 @@ Modules.BasketMechanics = (function(self,$){
 
         self._checkBasketForItems();
         self._removeItemPHP(_this);
+        footerFixed();
 
         return self;
 
@@ -573,7 +574,213 @@ Modules.BasketMechanics = (function(self,$){
 }(Modules.BasketMechanics || {}, jQuery));
 
 
+Modules.FilterMechanics = (function(self,$){
+
+    var _classNames = {
+        checkBox: '',
+        unTouchClass: '',
+        filtersAttrs: '',
+        filtersColorCLass: '',
+        label: '',
+        beforeItem: '',
+        filtersCont: '',
+        footer: ''
+    }
+    var _$classNames = {
+        checkBox: '',
+        filtersAttrs: '',
+        filtersColor: '',
+        label: '',
+        beforeItem: '',
+        filtersCont: '',
+        footer: ''
+    }
+    var _clickEvent = 'click';
+    var _name = 'name';
+    var _color = 'color';
+    var _colorHash = '#eaeaea';
+    var _bGColor = 'background-color';
+    var _$window = $(window);
+    var _$document = $(document);
+    var _$html = $('html');
+    var _topOffsetFilters;
+    var _filtersHeight;
+    var _footerHeight;
+    var _sizePoint = 1024;
+    var _filtersContCheck;
+    var _scrollTop;
+    var _htmlHeight;
+
+    self._construct = function(params){
+
+        $.extend(_classNames, params);
+        _$classNames.checkBox = $(_classNames.checkBox);
+        _$classNames.filtersAttrs = $(_classNames.filtersAttrs);
+        _$classNames.label = $(_classNames.label);
+        _$classNames.beforeItem = $(_classNames.beforeItem);
+        _$classNames.filtersCont = $(_classNames.filtersCont);
+        _$classNames.footer = $(_classNames.footer);
+        // _filtersContCheck = $(_classNames.filtersCont)[0];
+
+        self._scrollMechs();
+        _$window.resize(self._scrollMechs)
+        // $(window).resize(console.log('resize'))
+
+        _$classNames.checkBox.on(_clickEvent, function(e){
+            // e.preventDefault();
+            _this = this;
+            self._checkPossibility(_this);
+            self._checkBox(_this);
+        });
+
+        return self;
+
+    }
+
+    self._checkPossibility = function(_this){
+
+        if($(_this).parents(_classNames.unTouchClass).length > 0) return false;
+
+        return self;
+
+    }
+
+    self._checkBox = function(_this){
+
+        if($(_this).closest(_$classNames.filtersAttrs).hasClass(_classNames.filtersColorClass)){
+            if($(_this).is(':checked')) $($(_this).closest(_$classNames.label).find(_$classNames.beforeItem)).css(_bGColor, $(_this).closest(_$classNames.label).data(_color));
+            else  $($(_this).closest(_$classNames.label).find(_$classNames.beforeItem)).css(_bGColor, _colorHash);
+        }
+
+        return self;
+
+    }
+
+    self._scrollMechs = function(){
+
+        if ((self._checkWidth()) && (self._ifExists())) {
+            $('.deal_with_filters').addClass('filters_opened');
+            _$classNames.filtersCont.css({"transform":"translateY(0)"});
+            // _topOffsetFilters = 260;
+            _topOffsetFilters = _$classNames.filtersCont.offset().top;
+            _filtersHeight = _$classNames.filtersCont.height();
+            _footerHeight = _$classNames.footer.height();
+            self._stick(_topOffsetFilters, _filtersHeight, _footerHeight);
+        }
+        else if (!self._checkWidth()) {
+            // console.log('mob')
+            self._stick();
+            $('.deal_with_filters').removeClass('filters_opened');
+            _$classNames.filtersCont.css({
+                "-webkit-transform":"translateX(100%)",
+                "-ms-transform":"translateX(100%)",
+                "transform":"translateX(100%)"
+            });
+        }
+
+        return self;
+
+    }
+
+    self._stick = function(_topOffsetFilters, _filtersHeight, _footerHeight){
+
+        if (_footerHeight) {
+            _$window.on('scroll', scrolling);
+            console.log('on')
+        }
+
+        if (!_footerHeight) {
+            console.log('off')
+            _$window.off('scroll', scrolling);
+        }
+
+        function scrolling () {
+            _scrollTop = $(this).scrollTop();
+            _htmlHeight = _$html.height();
+            // console.log(_topOffsetFilters)
+
+            if ((self._checkWidth()) && (_topOffsetFilters <= _scrollTop)) {
+
+                if (_scrollTop >= _htmlHeight - _footerHeight - _filtersHeight) {
+                    _$classNames.filtersCont.css({
+                        "-webkit-transform":"translateY("+ (_htmlHeight - _footerHeight - _filtersHeight - 20 -  _topOffsetFilters) +"px)",
+                        "-ms-transform":"translateY("+ (_htmlHeight - _footerHeight - _filtersHeight - 20 -  _topOffsetFilters) +"px)",
+                        "transform":"translateY("+ (_htmlHeight - _footerHeight - _filtersHeight - 20 - _topOffsetFilters) +"px)"
+                    });
+                }
+
+                else {
+                    _$classNames.filtersCont.css({
+                        "-webkit-transform":"translateY("+ (_scrollTop - _topOffsetFilters) +"px)",
+                        "-ms-transform":"translateY("+ (_scrollTop - _topOffsetFilters) +"px)",
+                        "transform":"translateY("+ (_scrollTop - _topOffsetFilters) +"px)"
+                    });
+                }
+
+            }
+
+            else _$classNames.filtersCont.css({"transform":"translateY(0)"});
+        }
+
+        return self;
+
+    }
+
+    self._ifExists = function(){
+
+        if (_$classNames.filtersCont[0]) return true;
+        else return false;
+
+        return self;
+
+    }
+
+    self._checkWidth = function(){
+
+        if (_$document.width()  >= _sizePoint) {
+            console.log('gonna be true');
+            return true;
+        }
+        else {
+            console.log('gonna be false');
+            return false;
+        }     
+
+        return self;
+
+    }
+
+    return {
+
+        init: function(params){
+
+            self._construct(params);
+
+            return self;
+
+        }
+
+    }
+
+}(Modules.FilterMechanics || {}, jQuery));
+
+
+
 (function($){
+    // $(window).resize(filterResize);
+    // filterResize();
+    $(function(){
+        var filterMechanics = new Modules.FilterMechanics.init({
+            filtersCont: '.filters',
+            checkBox: '.filters input',
+            unTouchClass: '.untouch',
+            filtersAttrs: '.filters__attrs',
+            filtersColorClass: 'filters_color',
+            label: 'label',
+            beforeItem: '.before',
+            footer: 'footer'
+        });
+    });
     $(function(){
         var basketMechanics = new Modules.BasketMechanics.init({
             removeELement: '.basket_page__item_remove',
@@ -634,21 +841,31 @@ Modules.BasketMechanics = (function(self,$){
 
 
 function footerFixed() {
+    $('footer').removeClass('fixed');
+    $('.footer').attr('data-parallax', '{"y": 220}').removeClass('no_trs');
     var pageHeight = $('html').height();    
     var footerHeight = $('footer').height();
     var windowHeight = $(window).height();
     var pageWOFooter = pageHeight - footerHeight;
-    // var pageWFooter = pageHeight + footerHeight;
-    if (pageWOFooter <= windowHeight) {
+    
+    if ((pageWOFooter <= windowHeight) || ($(document).width() < 1024)) {
         $('.footer').removeAttr('data-parallax').addClass('no_trs').css('transform', 'none');        
     }
-    else if (pageHeight <= windowHeight) {
+    if (pageHeight <= windowHeight) {
         $('footer').addClass('fixed');
     }
+    // if ($(document).width() < 1024){
+    //     $('.footer').removeAttr('data-parallax').addClass('no_trs').css('transform', 'none'); 
+    // }
 }
 
 
 $(document).ready(function(){
+
+    $('.form__item .checkout').on('click', function (e) {
+        e.preventDefault();
+        window.location = 'success.html';
+    })
 
     
 
