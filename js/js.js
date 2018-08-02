@@ -402,7 +402,7 @@ Modules.ImageMechanics = (function(self,$){
 
     self._mobileCheck = function(){
 
-        if ($(window).width()>=768) {
+        if ($(window).width()>=1024) {
             self._openBigImage();
         }
 
@@ -584,7 +584,9 @@ Modules.FilterMechanics = (function(self,$){
         label: '',
         beforeItem: '',
         filtersCont: '',
-        footer: ''
+        footer: '',
+        filtersParentWr: '',
+        filtersParOpenClass: ''
     }
     var _$classNames = {
         checkBox: '',
@@ -593,19 +595,25 @@ Modules.FilterMechanics = (function(self,$){
         label: '',
         beforeItem: '',
         filtersCont: '',
-        footer: ''
+        footer: '',
+        filtersParentWr: ''
     }
     var _clickEvent = 'click';
+    // data attrs
     var _name = 'name';
     var _color = 'color';
+    // "invisible" color
     var _colorHash = '#eaeaea';
     var _bGColor = 'background-color';
     var _$window = $(window);
     var _$document = $(document);
     var _$html = $('html');
+    // variables
     var _topOffsetFilters;
     var _filtersHeight;
     var _footerHeight;
+    var _downPageVar;
+    // window width point
     var _sizePoint = 1024;
     var _filtersContCheck;
     var _scrollTop;
@@ -620,12 +628,13 @@ Modules.FilterMechanics = (function(self,$){
         _$classNames.beforeItem = $(_classNames.beforeItem);
         _$classNames.filtersCont = $(_classNames.filtersCont);
         _$classNames.footer = $(_classNames.footer);
-        // _filtersContCheck = $(_classNames.filtersCont)[0];
+        _$classNames.filtersParentWr = $(_classNames.filtersParentWr);
 
+        // scrolling mechanics
         self._scrollMechs();
         _$window.resize(self._scrollMechs)
-        // $(window).resize(console.log('resize'))
 
+        // filter click
         _$classNames.checkBox.on(_clickEvent, function(e){
             // e.preventDefault();
             _this = this;
@@ -647,6 +656,7 @@ Modules.FilterMechanics = (function(self,$){
 
     self._checkBox = function(_this){
 
+        // coloring filter
         if($(_this).closest(_$classNames.filtersAttrs).hasClass(_classNames.filtersColorClass)){
             if($(_this).is(':checked')) $($(_this).closest(_$classNames.label).find(_$classNames.beforeItem)).css(_bGColor, $(_this).closest(_$classNames.label).data(_color));
             else  $($(_this).closest(_$classNames.label).find(_$classNames.beforeItem)).css(_bGColor, _colorHash);
@@ -657,20 +667,24 @@ Modules.FilterMechanics = (function(self,$){
     }
 
     self._scrollMechs = function(){
-
+        // desktop
         if ((self._checkWidth()) && (self._ifExists())) {
-            $('.deal_with_filters').addClass('filters_opened');
+
+            _$classNames.filtersParentWr.addClass(_classNames.filtersParOpenClass);
             _$classNames.filtersCont.css({"transform":"translateY(0)"});
-            // _topOffsetFilters = 260;
+
             _topOffsetFilters = _$classNames.filtersCont.offset().top;
             _filtersHeight = _$classNames.filtersCont.height();
             _footerHeight = _$classNames.footer.height();
+
             self._stick(_topOffsetFilters, _filtersHeight, _footerHeight);
         }
+        // mobile
         else if (!self._checkWidth()) {
-            // console.log('mob')
+
+            _$classNames.filtersParentWr.removeClass(_classNames.filtersParOpenClass);
             self._stick();
-            $('.deal_with_filters').removeClass('filters_opened');
+
             _$classNames.filtersCont.css({
                 "-webkit-transform":"translateX(100%)",
                 "-ms-transform":"translateX(100%)",
@@ -685,41 +699,52 @@ Modules.FilterMechanics = (function(self,$){
     self._stick = function(_topOffsetFilters, _filtersHeight, _footerHeight){
 
         if (_footerHeight) {
+            _$window.off('scroll', );
             _$window.on('scroll', scrolling);
-            console.log('on')
         }
 
         if (!_footerHeight) {
-            console.log('off')
-            _$window.off('scroll', scrolling);
+            _$window.off('scroll', );
         }
+        
+        // console.log(_topOffsetFilters)
 
         function scrolling () {
             _scrollTop = $(this).scrollTop();
             _htmlHeight = _$html.height();
-            // console.log(_topOffsetFilters)
 
-            if ((self._checkWidth()) && (_topOffsetFilters <= _scrollTop)) {
+            if (_topOffsetFilters <= _scrollTop) {
 
-                if (_scrollTop >= _htmlHeight - _footerHeight - _filtersHeight) {
-                    _$classNames.filtersCont.css({
-                        "-webkit-transform":"translateY("+ (_htmlHeight - _footerHeight - _filtersHeight - 20 -  _topOffsetFilters) +"px)",
-                        "-ms-transform":"translateY("+ (_htmlHeight - _footerHeight - _filtersHeight - 20 -  _topOffsetFilters) +"px)",
-                        "transform":"translateY("+ (_htmlHeight - _footerHeight - _filtersHeight - 20 - _topOffsetFilters) +"px)"
-                    });
-                }
+                if (self._checkWidth()) {
 
-                else {
-                    _$classNames.filtersCont.css({
-                        "-webkit-transform":"translateY("+ (_scrollTop - _topOffsetFilters) +"px)",
-                        "-ms-transform":"translateY("+ (_scrollTop - _topOffsetFilters) +"px)",
-                        "transform":"translateY("+ (_scrollTop - _topOffsetFilters) +"px)"
-                    });
+                    _downPageVar = _htmlHeight - _footerHeight - _filtersHeight;
+
+                    if (_scrollTop >= _downPageVar) {
+                        _$classNames.filtersCont.css({
+                            "-webkit-transform":"translateY("+ (_downPageVar - 20 -  _topOffsetFilters) +"px)",
+                            "-ms-transform":"translateY("+ (_downPageVar - 20 -  _topOffsetFilters) +"px)",
+                            "transform":"translateY("+ (_downPageVar - 20 - _topOffsetFilters) +"px)"
+                        });
+                    }
+
+                    else {
+                        _$classNames.filtersCont.css({
+                            "-webkit-transform":"translateY("+ (_scrollTop - _topOffsetFilters) +"px)",
+                            "-ms-transform":"translateY("+ (_scrollTop - _topOffsetFilters) +"px)",
+                            "transform":"translateY("+ (_scrollTop - _topOffsetFilters) +"px)"
+                        });
+                    }
                 }
 
             }
 
-            else _$classNames.filtersCont.css({"transform":"translateY(0)"});
+            else if (self._checkWidth()) _$classNames.filtersCont.css({"transform":"translateY(0)"});
+
+            else if (!self._checkWidth()) _$classNames.filtersCont.css({
+                "-webkit-transform":"translateX(100%)",
+                "-ms-transform":"translateX(100%)",
+                "transform":"translateX(100%)"
+            });
         }
 
         return self;
@@ -738,11 +763,9 @@ Modules.FilterMechanics = (function(self,$){
     self._checkWidth = function(){
 
         if (_$document.width()  >= _sizePoint) {
-            console.log('gonna be true');
             return true;
         }
         else {
-            console.log('gonna be false');
             return false;
         }     
 
@@ -767,10 +790,10 @@ Modules.FilterMechanics = (function(self,$){
 
 
 (function($){
-    // $(window).resize(filterResize);
-    // filterResize();
     $(function(){
         var filterMechanics = new Modules.FilterMechanics.init({
+            filtersParentWr: '.deal_with_filters',
+            filtersParOpenClass: 'filters_opened',
             filtersCont: '.filters',
             checkBox: '.filters input',
             unTouchClass: '.untouch',
@@ -854,9 +877,6 @@ function footerFixed() {
     if (pageHeight <= windowHeight) {
         $('footer').addClass('fixed');
     }
-    // if ($(document).width() < 1024){
-    //     $('.footer').removeAttr('data-parallax').addClass('no_trs').css('transform', 'none'); 
-    // }
 }
 
 
@@ -890,7 +910,7 @@ $(document).ready(function(){
     });    
 
     function horizontalFilters () {
-        if ($(window).width() < 1024) {
+        if ($(window).width() < 1007) {
             $('.footer').removeAttr('data-parallax').addClass('no_trs').css('transform', 'none');
             var owl = $('.additional_nav').owlCarousel({
                 items: 6,

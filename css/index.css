@@ -961,12 +961,13 @@ table{
 .add_char__name{
 	max-width: 200px;
 	display: inline-block;
-	padding-right: 50px;
+	padding-right: 40px;
 	line-height: 18px;
 }
 
 .add_char__value{
 	max-width: 300px;
+	vertical-align: top;
 }
 
 .char__params li{
@@ -1844,9 +1845,12 @@ background: -webkit-linear-gradient(90deg, rgba(254,242,184,1) 34%, rgba(254,242
 		text-align: left;
 		margin: 0 auto;
 	}
+	.page__products_wr.filters-enabled{
+		position: relative;
+	}
 	.additional_nav.owl-loaded{
 		overflow: hidden;
-		width: 90%;
+		width: 96%;
 		padding-left: 1%;
 	}
 	.additional_nav.owl-loaded .owl-item{
@@ -1907,9 +1911,9 @@ background: -webkit-linear-gradient(90deg, rgba(254,242,184,1) 34%, rgba(254,242
 		padding-bottom: 20px;
 	}
 	.toggle_filters{
-		right: 5%;
-		width: 30px;
-		top: -28px;
+		right: 1%;
+	    width: 30px;
+	    top: -31px;
 		height: 30px;
 		background-color: #fafafa;
     	border: #fafafa 5px solid;
