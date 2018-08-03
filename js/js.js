@@ -973,21 +973,76 @@ Modules.NavBarSlider = (function(self,$){
 
 }(Modules.NavBarSlider || {}, jQuery));
 
-function footerFixed() {
-    $('footer').removeClass('fixed');
-    $('.footer').attr('data-parallax', '{"y": 220}').removeClass('no_trs');
-    var pageHeight = $('html').height();    
-    var footerHeight = $('footer').height();
-    var windowHeight = $(window).height();
-    var pageWOFooter = pageHeight - footerHeight;
-    
-    if ((pageWOFooter <= windowHeight) || ($(document).width() < 1007)) {
-        $('.footer').removeAttr('data-parallax').addClass('no_trs').css('transform', 'none');        
+
+Modules.FixFooter = (function(self,$){
+
+    var _classNames = {
+        footer: '',
+        footerCont: '',
+        fixClass: '',
+        offTrsClass: ''
     }
-    if (pageHeight <= windowHeight) {
-        $('footer').addClass('fixed');
+    var _$classNames = {
+        footer: '',
+        footerCont: ''
     }
-}
+    var _$window = $(window);
+    var _$document = $(document);
+    var _$html = $('html');
+    var _pageHeight;
+    var _footerHeight;
+    var _windowHeight;
+    // page's height w/o footer
+    var _pageWOFooter;
+    //data attr
+    var _attr = 'data-parallax';
+
+    self._construct = function(params){
+
+        $.extend(_classNames, params);
+        _$classNames.footer = $(_classNames.footer);
+        _$classNames.footerCont = $(_classNames.footerCont);
+
+        self._resizing();
+        _$window.resize(self._resizing);
+
+        return self;
+
+    }
+
+    self._resizing = function(){
+
+        _$classNames.footer.removeClass(_classNames.fixClass);
+        _$classNames.footerCont.attr(_attr, '{"y": 220}').removeClass(_classNames.offTrsClass);
+        _pageHeight = _$html.height();    
+        _footerHeight = _$classNames.footer.height();
+        _windowHeight = _$window.height();
+        _pageWOFooter = _pageHeight - _footerHeight;
+        
+        if ((_pageWOFooter <= _windowHeight) || ($(document).width() < 1007)) {
+            _$classNames.footerCont.removeAttr(_attr).addClass(_classNames.offTrsClass).css('transform', 'none');        
+        }
+        if (_pageHeight <= _windowHeight) {
+            _$classNames.footer.addClass(_classNames.fixClass);
+        }
+
+        return self;
+
+    }
+
+    return {
+
+        init: function(params){
+
+            self._construct(params);
+
+            return self;
+
+        }
+
+    }
+
+}(Modules.FixFooter || {}, jQuery));
 
 
 (function($){
