@@ -21,6 +21,8 @@ var Modules = (function(self){
     
 }(Modules || {}));
 
+// for some reason 1006 = 1023; 1007 = 1024
+
 
 Modules.UltravioletTheme = (function(self,$){
 
@@ -151,13 +153,13 @@ Modules.ToggleFilters = (function(self,$){
     self._checkCondition = function(){
     	if (_$classNames.parentWrapper.hasClass(_classNames.openFiltersClass)){
     		self._hideFilters();
-            if ($(window).width()<=1023){
+            if ($(window).width()<=1006){
                 $('html, body').toggleClass('overflow');
             }
     	}
     	else{
     		self._showFilters();
-            if ($(window).width()<=1023){
+            if ($(window).width()<=1006){
                 $('html, body').toggleClass('overflow');
             }
     	}
@@ -402,7 +404,7 @@ Modules.ImageMechanics = (function(self,$){
 
     self._mobileCheck = function(){
 
-        if ($(window).width()>=1024) {
+        if ($(window).width()>=1007) {
             self._openBigImage();
         }
 
@@ -614,7 +616,7 @@ Modules.FilterMechanics = (function(self,$){
     var _footerHeight;
     var _downPageVar;
     // window width point
-    var _sizePoint = 1024;
+    var _sizePoint = 1007;
     var _filtersContCheck;
     var _scrollTop;
     var _htmlHeight;
@@ -788,8 +790,231 @@ Modules.FilterMechanics = (function(self,$){
 }(Modules.FilterMechanics || {}, jQuery));
 
 
+Modules.LaningProds = (function(self,$){
+
+    var _classNames = {
+        productItem: '',
+        productsCont: '',
+        firstColumnClass: '',
+        lastColumnCLass: '',
+        toggleFilters: ''
+    }
+    var _$classNames = {
+        productItem: '',
+        productsCont: '',
+        toggleFilters: ''
+    }
+    var _$window = $(window);
+    var _$document = $(document);
+    var _sizePoint = 1007;
+    // variables for size counting
+    var _itemWidth;
+    var _contWidth;
+    var _intPart;
+    var _flPart;
+
+    self._construct = function(params){
+
+        $.extend(_classNames, params);
+        _$classNames.productItem = $(_classNames.productItem);
+        _$classNames.productsCont = $(_classNames.productsCont);
+        _$classNames.toggleFilters = $(_classNames.toggleFilters);
+
+        self._resizing();
+        _$window.resize(self._resizing);
+        _$classNames.toggleFilters.click(function () {
+            // maybe later i'll fix it
+            setTimeout(self._resizing, 10);
+        })
+
+        return self;
+
+    }
+
+    self._resizing = function(){
+
+        if (self._checkWidth) {
+            _$classNames.productItem.removeClass(_classNames.firstColumnClass).removeClass(_classNames.lastColumnCLass);
+            _itemWidth = _$classNames.productItem.outerWidth();
+            _contWidth = _$classNames.productsCont.outerWidth();
+            // console.log(_contWidth, _itemWidth)
+            _intPart = ~~(_contWidth/_itemWidth)
+            _flPart = _contWidth % _itemWidth;
+            // 300 ~ .99, 200 ~ .8
+            if ((_flPart >= 200) && (_flPart < 300)) return false;
+
+            for (var i = 0; i < 500; i++){
+                _$classNames.productItem.eq(_intPart*i).addClass(_classNames.firstColumnClass);
+            }
+
+            for (var i = 0; i < 500; i++){
+                _$classNames.productItem.eq(_intPart*(i-1)-1).addClass(_classNames.lastColumnCLass);                
+            }
+        }
+        else{
+            _$classNames.productItem.removeClass(_classNames.firstColumnClass).removeClass(_classNames.lastColumnCLass);
+        }
+        
+
+        return self;
+
+    }
+
+    self._checkWidth = function(){
+
+        if (_$document.width()  >= _sizePoint) {
+            return true;
+        }
+        else {
+            return false;
+        }     
+
+        return self;
+
+    }
+
+    return {
+
+        init: function(params){
+
+            self._construct(params);
+
+            return self;
+
+        }
+
+    }
+
+}(Modules.LaningProds || {}, jQuery));
+
+
+
+Modules.NavBarSlider = (function(self,$){
+
+    var _classNames = {
+        navBar: '',
+        trigger: '',
+        offClass: ''
+    }
+    var _$classNames = {
+        navBar: '',
+        offClass: ''
+    }
+    var _$window = $(window);
+    var _$document = $(document);
+    // var _sizePoint = 1007;
+    var _sizePoint = 1007;
+
+    self._construct = function(params){
+
+        $.extend(_classNames, params);
+        _$classNames.navBar = $(_classNames.navBar);
+
+        self._resizing();
+        _$window.resize(self._resizing);
+
+        return self;
+
+    }
+
+    self._resizing = function(){
+
+        if (self._checkWidth()) {
+            var owl = _$classNames.navBar.owlCarousel({
+                items: 6,
+                loop: false,
+                dots: false,
+                nav: false,
+                responsive:{
+                    768:{
+                        items:6
+                    },
+                    414:{
+                        items:4
+                    },
+                    0:{
+                        items:3
+                    }
+                }
+            });
+        }
+        else{
+            _$classNames.navBar.trigger(_classNames.trigger).addClass(_classNames.offClass);
+        }
+
+        return self;
+
+    }
+
+    self._checkWidth = function(){
+
+        if (_$document.width() < _sizePoint) {
+            return true;
+        }
+        else {
+            return false;
+        }     
+
+        return self;
+
+    }
+
+    return {
+
+        init: function(params){
+
+            self._construct(params);
+
+            return self;
+
+        }
+
+    }
+
+}(Modules.NavBarSlider || {}, jQuery));
+
+function footerFixed() {
+    $('footer').removeClass('fixed');
+    $('.footer').attr('data-parallax', '{"y": 220}').removeClass('no_trs');
+    var pageHeight = $('html').height();    
+    var footerHeight = $('footer').height();
+    var windowHeight = $(window).height();
+    var pageWOFooter = pageHeight - footerHeight;
+    
+    if ((pageWOFooter <= windowHeight) || ($(document).width() < 1007)) {
+        $('.footer').removeAttr('data-parallax').addClass('no_trs').css('transform', 'none');        
+    }
+    if (pageHeight <= windowHeight) {
+        $('footer').addClass('fixed');
+    }
+}
+
 
 (function($){
+    $(function(){
+        var fixFooter = new Modules.FixFooter.init({
+            footer: 'footer',
+            footerCont: '.footer',
+            fixClass: 'fixed',
+            offTrsClass: 'no_trs'
+        });
+    });
+    $(function(){
+        var navBarSlider = new Modules.NavBarSlider.init({
+            navBar: '.additional_nav',
+            trigger: 'destroy.owl.carousel',
+            offClass: 'off'
+        });
+    });
+    $(function(){
+        var laningProds = new Modules.LaningProds.init({
+            productItem: '.products__item',
+            productsCont: '.products',
+            firstColumnClass: 'first_column',
+            lastColumnCLass: 'last_column',
+            toggleFilters: '.toggle_filters'
+        });
+    });
     $(function(){
         var filterMechanics = new Modules.FilterMechanics.init({
             filtersParentWr: '.deal_with_filters',
@@ -863,31 +1088,12 @@ Modules.FilterMechanics = (function(self,$){
 })(jQuery);
 
 
-function footerFixed() {
-    $('footer').removeClass('fixed');
-    $('.footer').attr('data-parallax', '{"y": 220}').removeClass('no_trs');
-    var pageHeight = $('html').height();    
-    var footerHeight = $('footer').height();
-    var windowHeight = $(window).height();
-    var pageWOFooter = pageHeight - footerHeight;
-    
-    if ((pageWOFooter <= windowHeight) || ($(document).width() < 1024)) {
-        $('.footer').removeAttr('data-parallax').addClass('no_trs').css('transform', 'none');        
-    }
-    if (pageHeight <= windowHeight) {
-        $('footer').addClass('fixed');
-    }
-}
-
-
 $(document).ready(function(){
 
     $('.form__item .checkout').on('click', function (e) {
         e.preventDefault();
         window.location = 'success.html';
-    })
-
-    
+    });    
 
 	$(document).on("click", ".burgerbutton", function (e) {
 		e.preventDefault();
@@ -897,76 +1103,50 @@ $(document).ready(function(){
 	});
 
     $('.about__desc-title').click(function(){
-        if ($(window).width()<=1023){
+        if ($(window).width()<=1006){
             $(this).closest('.desc_wr').toggleClass('opened');
         }
     });
 
     $('.examples__cap').click(function(){
-        if ($(window).width()<=1023){
+        if ($(window).width()<=1006){
             $('.examples_wr').toggleClass('opened');
             $(this).toggleClass('opened');
         }
     });    
 
-    function horizontalFilters () {
-        if ($(window).width() < 1007) {
-            $('.footer').removeAttr('data-parallax').addClass('no_trs').css('transform', 'none');
-            var owl = $('.additional_nav').owlCarousel({
-                items: 6,
-                loop: false,
-                dots: false,
-                nav: false,
-                responsive:{
-                    768:{
-                        items:6
-                    },
-                    414:{
-                        items:4
-                    },
-                    0:{
-                        items:3
-                    }
-                }
-            });
-        }
-        else{
-            $('.footer').attr('data-parallax', '{"y": 220}').removeClass('no_trs');
-            $('.additional_nav').trigger('destroy.owl.carousel').addClass('off');
-        }
-    }
+    
 
-    horizontalFilters();
-	$(window).resize(horizontalFilters);
+    // function laningProds() {
+    //     if ($(window).width() > 1007) {
+    //         $('.products__item').removeClass('first_column last_column')
+    //         var itemWidth = $('.products__item').outerWidth();
+    //         var contWidth = $('.products').outerWidth();
+    //         var intPart = ~~(contWidth/itemWidth)
+    //         var flPart = contWidth % itemWidth;
+    //         if ((flPart >= 200) && (flPart < 300)) return false
+    //         console.log(intPart, flPart)
+    //         for (var i = 0; i < 200; i++){
+    //             $('.products__item').eq(intPart*i).addClass('first_column');
+    //         }
+    //         for (var i = 0; i < 200; i++){
+    //             $('.products__item').eq(intPart*(i-1)-1).addClass('last_column');                
+    //         }
+    //     }
+    //     else{
+    //         $('.products__item').removeClass('first_column last_column')
+    //     }
+    // }
+    // laningProds();
+    // $(window).resize(laningProds);
+    // $('.toggle_filters').click(laningProds)
 
-    function laningProds() {
-        if ($(window).width() > 1024) {
-            $('.products__item').removeClass('first_column last_column')
-            var itemWidth = $('.products__item').outerWidth();
-            var contWidth = $('.products').outerWidth();
-            var intPart = ~~(contWidth/itemWidth)
-            console.log(intPart)
-            for (var i = 0; i < 200; i++){
-                $('.products__item').eq(intPart*i).addClass('first_column');
-            }
-            for (var i = 0; i < 200; i++){
-                $('.products__item').eq(intPart*(i-1)-1).addClass('last_column');                
-            }
-        }
-        else{
-            $('.products__item').removeClass('first_column last_column')
-        }
-    }
-    laningProds();
-    $(window).resize(laningProds);
-    $('.toggle_filters').click(laningProds)
-
-    $(window).resize(footerFixed);
-    footerFixed();
+    // $(window).resize(footerFixed);
+    // footerFixed();
 
     // function footerSizing() {
     //  var footerHeight = $('.footer').height();
- //        if ($(window).width()>=1024){
+ //        if ($(window).width()>=1007){
     //    $('section').last().css('margin-bottom', footerHeight + 'px');
  //        }
  //        else{

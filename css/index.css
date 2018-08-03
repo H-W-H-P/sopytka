@@ -1482,6 +1482,7 @@ a{
 .products__item.last_column{
 	padding-right: 0;
 	border: none;
+	margin-right: 30px;
 }
 
 .filters_opened .filters{
