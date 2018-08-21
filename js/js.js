@@ -790,102 +790,102 @@ Modules.FilterMechanics = (function(self,$){
 }(Modules.FilterMechanics || {}, jQuery));
 
 
-Modules.LaningProds = (function(self,$){
+// Modules.LaningProds = (function(self,$){
 
-    var _classNames = {
-        productItem: '',
-        productsCont: '',
-        firstColumnClass: '',
-        lastColumnCLass: '',
-        toggleFilters: ''
-    }
-    var _$classNames = {
-        productItem: '',
-        productsCont: '',
-        toggleFilters: ''
-    }
-    var _$window = $(window);
-    var _$document = $(document);
-    var _sizePoint = 1007;
-    // variables for size counting
-    var _itemWidth;
-    var _contWidth;
-    var _intPart;
-    var _flPart;
+//     var _classNames = {
+//         productItem: '',
+//         productsCont: '',
+//         firstColumnClass: '',
+//         lastColumnCLass: '',
+//         toggleFilters: ''
+//     }
+//     var _$classNames = {
+//         productItem: '',
+//         productsCont: '',
+//         toggleFilters: ''
+//     }
+//     var _$window = $(window);
+//     var _$document = $(document);
+//     var _sizePoint = 1007;
+//     // variables for size counting
+//     var _itemWidth;
+//     var _contWidth;
+//     var _intPart;
+//     var _flPart;
 
-    self._construct = function(params){
+//     self._construct = function(params){
 
-        $.extend(_classNames, params);
-        _$classNames.productItem = $(_classNames.productItem);
-        _$classNames.productsCont = $(_classNames.productsCont);
-        _$classNames.toggleFilters = $(_classNames.toggleFilters);
+//         $.extend(_classNames, params);
+//         _$classNames.productItem = $(_classNames.productItem);
+//         _$classNames.productsCont = $(_classNames.productsCont);
+//         _$classNames.toggleFilters = $(_classNames.toggleFilters);
 
-        self._resizing();
-        _$window.resize(self._resizing);
-        _$classNames.toggleFilters.click(function () {
-            // maybe later i'll fix it
-            setTimeout(self._resizing, 10);
-        })
+//         self._resizing();
+//         _$window.resize(self._resizing);
+//         _$classNames.toggleFilters.click(function () {
+//             // maybe later i'll fix it
+//             setTimeout(self._resizing, 10);
+//         })
 
-        return self;
+//         return self;
 
-    }
+//     }
 
-    self._resizing = function(){
+//     self._resizing = function(){
 
-        if (self._checkWidth) {
-            _$classNames.productItem.removeClass(_classNames.firstColumnClass).removeClass(_classNames.lastColumnCLass);
-            _itemWidth = _$classNames.productItem.outerWidth();
-            _contWidth = _$classNames.productsCont.outerWidth();
-            // console.log(_contWidth, _itemWidth)
-            _intPart = ~~(_contWidth/_itemWidth)
-            _flPart = _contWidth % _itemWidth;
-            // 300 ~ .99, 200 ~ .8
-            if ((_flPart >= 200) && (_flPart < 300)) return false;
+//         if (self._checkWidth) {
+//             _$classNames.productItem.removeClass(_classNames.firstColumnClass).removeClass(_classNames.lastColumnCLass);
+//             _itemWidth = _$classNames.productItem.outerWidth();
+//             _contWidth = _$classNames.productsCont.outerWidth();
+//             // console.log(_contWidth, _itemWidth)
+//             _intPart = ~~(_contWidth/_itemWidth)
+//             _flPart = _contWidth % _itemWidth;
+//             // 300 ~ .99, 200 ~ .8
+//             if ((_flPart >= 200) && (_flPart < 300)) return false;
 
-            for (var i = 0; i < 500; i++){
-                _$classNames.productItem.eq(_intPart*i).addClass(_classNames.firstColumnClass);
-            }
+//             for (var i = 0; i < 500; i++){
+//                 _$classNames.productItem.eq(_intPart*i).addClass(_classNames.firstColumnClass);
+//             }
 
-            for (var i = 0; i < 500; i++){
-                _$classNames.productItem.eq(_intPart*(i-1)-1).addClass(_classNames.lastColumnCLass);                
-            }
-        }
-        else{
-            _$classNames.productItem.removeClass(_classNames.firstColumnClass).removeClass(_classNames.lastColumnCLass);
-        }
+//             for (var i = 0; i < 500; i++){
+//                 _$classNames.productItem.eq(_intPart*(i-1)-1).addClass(_classNames.lastColumnCLass);                
+//             }
+//         }
+//         else{
+//             _$classNames.productItem.removeClass(_classNames.firstColumnClass).removeClass(_classNames.lastColumnCLass);
+//         }
         
 
-        return self;
+//         return self;
 
-    }
+//     }
 
-    self._checkWidth = function(){
+//     self._checkWidth = function(){
 
-        if (_$document.width()  >= _sizePoint) {
-            return true;
-        }
-        else {
-            return false;
-        }     
+//         if (_$document.width()  >= _sizePoint) {
+//             return true;
+//         }
+//         else {
+//             return false;
+//         }     
 
-        return self;
+//         return self;
 
-    }
+//     }
 
-    return {
+//     return {
 
-        init: function(params){
+//         init: function(params){
 
-            self._construct(params);
+//             self._construct(params);
 
-            return self;
+//             return self;
 
-        }
+//         }
 
-    }
+//     }
 
-}(Modules.LaningProds || {}, jQuery));
+// }(Modules.LaningProds || {}, jQuery));
 
 
 
@@ -1061,15 +1061,15 @@ Modules.FixFooter = (function(self,$){
             offClass: 'off'
         });
     });
-    $(function(){
-        var laningProds = new Modules.LaningProds.init({
-            productItem: '.products__item',
-            productsCont: '.products',
-            firstColumnClass: 'first_column',
-            lastColumnCLass: 'last_column',
-            toggleFilters: '.toggle_filters'
-        });
-    });
+    // $(function(){
+    //     var laningProds = new Modules.LaningProds.init({
+    //         productItem: '.products__item',
+    //         productsCont: '.products',
+    //         firstColumnClass: 'first_column',
+    //         lastColumnCLass: 'last_column',
+    //         toggleFilters: '.toggle_filters'
+    //     });
+    // });
     $(function(){
         var filterMechanics = new Modules.FilterMechanics.init({
             filtersParentWr: '.deal_with_filters',
