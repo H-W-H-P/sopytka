@@ -4,7 +4,8 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Document</title>
-	<link href="https://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet">
+	<!-- <link href="https://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet"> -->
+	<link href=&quot;//fonts.googleapis.com/css?family=PT+Sans:400,400italic,700,700italic&amp;subset=latin,cyrillic&quot; rel="stylesheet">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="css/index.css">
 </head>
@@ -41,9 +42,9 @@
 
 			<div class="info_top">
 				<div class="links_block info_top__links">
-					<a href="delievery.html">Доставка</a>
-					<a href="payment.html">Оплата</a>
-					<a href="contacts.html">Контактная информация</a>
+					<a data-check="delievery.html" href="delievery.html">Доставка</a>
+					<a data-check="payment.html" href="payment.html">Оплата</a>
+					<a data-check="contacts.html" href="contacts.html">Контактная информация</a>
 				</div>
 				<div class="tels_top">
 					Телефоны: 
@@ -94,6 +95,22 @@
 
 	<section class="delievery_page">
 		<h1>Способы доставки</h1>
+		<div class="payment__btns">
+			<div class="payment__btns1">
+				<a href="#" class="payment__btn deliev">Пластик для 3D принтера</a>
+				<a href="#" class="payment__btn another">Другие виды продукции</a>
+			</div>
+			<div class="payment__btns2">
+				<a href="#" class="payment__btn">Москва и ближнее Подмосковье</a>
+				<a href="#" class="payment__btn">Самовывоз</a>
+				<a href="#" class="payment__btn">Регионы России</a>
+				<a href="#" class="payment__btn">СНГ</a>
+			</div>
+			<div class="payment__btns3 non_displayed">
+				<a href="#" class="payment__btn">Курьерская доставка</a>
+				<a href="#" class="payment__btn">Самовывоз</a>
+			</div>
+		</div>
 		<p class="title">Доставка прутка для 3D принтера</p>
 		<p>При оформлении заказа стоимость доставки рассчитывается автоматически, вам только нужно выбрать</br>
 удобный способ доставки и заполнить все поля формы оформления заказа.</p>
