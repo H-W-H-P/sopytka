@@ -1173,10 +1173,12 @@ $(document).ready(function(){
     $('.dark_phone').click(function () {
         $('.head').removeClass('open');
         $('.deal_with_filters').removeClass('filters_opened');
+        $('html, body').removeClass('overflow');
     });
 
     $('.burgerbutton').click(function () {
         $('.deal_with_filters').removeClass('filters_opened');
+        // $('html, body').removeClass('overflow');
     });
 
     $('.payment__btn.another').click(function () {
